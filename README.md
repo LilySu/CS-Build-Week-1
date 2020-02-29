@@ -59,15 +59,27 @@ and uncomment
             pusher.trigger(f'p-channel-{p_uuid}', u'broadcast', {'message':f'{player.user.username} has entered from the {reverse_dirs[direction]}.'})
 ```
 
-
-
-* Add rooms to your database
+Add rooms to your database
   * `./manage.py shell`
   * Copy/paste the contents of `util/create_world.py` into the Python interpreter
   * Exit the interpreter
 
-* Run the server
-  * `./manage.py runserver`
+Take a look at djangorestframework setup
+```
+python manage.py runserver
+```
+Navigate to 
+
+http://127.0.0.1:8000/api/registration/
+
+Register a new user named "admin"
+
+checkout http://127.0.0.1:8000/api/user/?name=admin
+
+PUT in first name, last name, take a look around
+  
+  
+  
 
 ## FAQs and Troubleshooting
 
