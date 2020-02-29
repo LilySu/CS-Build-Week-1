@@ -77,27 +77,22 @@ Register a new user named "admin"
 checkout http://127.0.0.1:8000/api/user/?name=admin
 
 PUT in first name, last name, take a look around
+
+### Set up User Auth
+Follow tutorial at: https://medium.com/@dakota.lillie/django-react-jwt-authentication-5015ee00ef9a
+
+Change "core" in tutorial to adventure
+
+To check login and obtain a token auth: http://127.0.0.1:8000/token-auth/
+
+links that work related to the game: 
+http://127.0.0.1:8000/api/adventure/init
+http://127.0.0.1:8000/api/adventure/move # GET: user inputs n, s, e, w
+http://127.0.0.1:8000/api/adventure/say # POST: results of what room player is in
   
   
   
 
-## FAQs and Troubleshooting
-
-### 1. Can you show me an example of a map visualization?
-
-Here's a sample project created by [a team in CSPT2](https://confident-wright-ca0176.netlify.com): 
-
-![Lambda MUD 1](img/pt2_lambdamud.png)
-
-And here's [a FT team](https://lambdaschool.com/lab-demos/lambda-mud) that went above and beyond with their use of graphics:
-
-![Lambda MUD 2](img/ex_lambdamud.png)
-
-And here's an example on iOS:
-
-![Lambda MUD Mobile](img/ios_lambdamud.jpg)
-
-### 2. How do I build something like that?
 
 Think about the algorithm to draw your map. It will probably be something like this:
 
@@ -115,10 +110,6 @@ What data do you need to implement this? A list of rooms, their exits, maybe the
 
 I'll leave that to you to determine.
 
-
-### 4. What is Pusher?
-
-Pusher is a cross-platform websocket library. This will allow you to turn your app into a real MUD with live push notifications to your client. You can consider integration to be a stretch goal but it's worth the effort if you have the time: websockets are powerful!
 
 
 ### 5. What will the `rooms` API endpoint look like?
