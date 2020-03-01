@@ -70,25 +70,25 @@ python manage.py runserver
 ```
 Navigate to 
 
-http://127.0.0.1:8000/api/registration/
+### http://127.0.0.1:8000/api/registration/
 
 Register a new user named "admin"
 
-checkout http://127.0.0.1:8000/api/user/?name=admin
+### checkout http://127.0.0.1:8000/api/user/?name=admin
 
 PUT in first name, last name, take a look around
 
 ### Set up User Auth
-Follow tutorial at: https://medium.com/@dakota.lillie/django-react-jwt-authentication-5015ee00ef9a
+### Follow tutorial at: https://medium.com/@dakota.lillie/django-react-jwt-authentication-5015ee00ef9a
 
 Change "core" in tutorial to adventure
 
-To check login and obtain a token auth: http://127.0.0.1:8000/token-auth/
+### To check login and obtain a token auth: http://127.0.0.1:8000/token-auth/
 
 links that work related to the game: 
-http://127.0.0.1:8000/api/adventure/init
-http://127.0.0.1:8000/api/adventure/move # GET: user inputs n, s, e, w
-http://127.0.0.1:8000/api/adventure/say # POST: results of what room player is in
+### http://127.0.0.1:8000/api/adventure/init
+### http://127.0.0.1:8000/api/adventure/move # GET: user inputs n, s, e, w
+### http://127.0.0.1:8000/api/adventure/say # POST: results of what room player is in
   
   
   
