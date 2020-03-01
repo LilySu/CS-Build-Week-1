@@ -14,29 +14,60 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserSerializer, UserSerializerWithToken
 
+from django.db import connection
+
 
 # instantiate pusher
 pusher = Pusher(app_id=config('PUSHER_APP_ID'), key=config('PUSHER_APP_KEY'), secret=config('PUSHER_APP_SECRET'), cluster=config('PUSHER_CLUSTER'))
 
 @csrf_exempt
-@api_view(["GET"])
-# def initialize(request):
+@api_view(["GET"])#computer releases the following information
+
 def initialize(request):
     user = UserSerializer(request.user)
-    # user = request.user
-    player = user.player
-    player_id = player.id
-    uuid = player.uuid
-    room = player.room()
-    players = room.playerNames(player_id)
-    return JsonResponse({'uuid': uuid, 'name':player.user.username, 'title':room.title, 'description':room.description, 'players':players}, safe=True)
-    # return JsonResponse({'uuid'}, safe=True)    
+
+    def insertuser(user): # insert id as player_id from auth_user to auth_user_user
+        sql = f'''
+        INSERT into auth_user_user_permissions VALUES
+        ('{user}')
+        ;
+        '''
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute(sql)
+                return cursor.fetchall()
+        except Exception as e:
+            return [e]
+
+    def retrieve_permission_id(user):
+        sql = f'''
+        select permission_id 
+        from auth_user_user_permissions 
+        where user_id = '{user_id}';
+        '''
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute(sql)
+                return cursor.fetchall()
+        except Exception as e:
+            return [e]
+    
+
+
+    player = user.player # permission_id? from auth_user_user_permissions
+    # player_id = player.id # user_id from adventure_player table
+    # uuid = player.uuid # uuid from adventure_player table
+    # room = player.room() # currentRoom from adventure_player
+    # players = room.playerNames(player_id) # user_id where group_id is same as group_id in user_id in auth_user_groups # get name from auth_group
+    # return JsonResponse({'uuid': uuid, 'name':player.user.username, 'title':room.title, 'description':room.description, 'players':players}, safe=True)
+
+    return JsonResponse({'uuid'}, safe=True)    
     # serializer = UserSerializer(request.user)
     # return Response(serializer.data)    
 
 
 @csrf_exempt
-@api_view(["POST"])
+@api_view(["POST"])#user inputs the direction
 def move(request):
     dirs={"n": "north", "s": "south", "e": "east", "w": "west"}
     reverse_dirs = {"n": "south", "s": "north", "e": "west", "w": "east"}
