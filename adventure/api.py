@@ -24,10 +24,10 @@ pusher = Pusher(app_id=config('PUSHER_APP_ID'), key=config('PUSHER_APP_KEY'), se
 @api_view(["GET"])#computer releases the following information
 
 def initialize(request):
-    user = request.user
-    # user = UserSerializer(request.user)
-    # serializer = UserSerializer(request.user)
-    # # return Response(serializer.data)    # returns { username: "admin"} in json 
+    # user = request.user
+    user = UserSerializer(request.user)
+    serializer = UserSerializer(request.user)
+    return Response(serializer.data)    # returns { username: "admin"} in json 
     # username = serializer.data
     # def retrieve_id(username):
     #     sql = f'''
@@ -41,12 +41,12 @@ def initialize(request):
     #             return cursor.fetchall()
     #     except Exception as e:
     #         return [e]
-    player = user.player
-    player_id = player.id
-    room = player.room()
-    players = room.playerNames(player_id)
+    # player = user.player
+    # player_id = player.id
+    # room = player.room()
+    # players = room.playerNames(player_id)
     
-    return Response(players)
+    # return Response(user)
 
     def retrieve_user_id(user):
         sql = f'''
