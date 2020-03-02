@@ -23,11 +23,11 @@ pusher = Pusher(app_id=config('PUSHER_APP_ID'), key=config('PUSHER_APP_KEY'), se
 @csrf_exempt
 @api_view(["GET"])#computer releases the following information
 
-def initialize(request):
-    # user = request.user
-    user = UserSerializer(request.user)
-    serializer = UserSerializer(request.user)
-    return Response(serializer.data)    # returns { username: "admin"} in json 
+# def initialize(request):
+#     # user = request.user
+#     user = UserSerializer(request.user)
+#     serializer = UserSerializer(request.user)
+#     return Response(serializer.data)    # returns { username: "admin"} in json 
     # username = serializer.data
     # def retrieve_id(username):
     #     sql = f'''
@@ -46,7 +46,17 @@ def initialize(request):
     # room = player.room()
     # players = room.playerNames(player_id)
     
-    # return Response(user)
+    # return player_id
+def initialize(request):
+    user = request.user
+    player = user.player
+    player_id = player.id
+    uuid = player.uuid
+    room = player.room()
+    players = room.playerNames(player_id)
+    return JsonResponse({'uuid': uuid, 'name':player.user.username, 'title':room.title, 'description':room.description, 'players':players}, safe=True)
+    # return JsonResponse(player_id, safe=False)
+
 
     def retrieve_user_id(user):
         sql = f'''
