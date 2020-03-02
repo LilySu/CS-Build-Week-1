@@ -59,33 +59,40 @@ and uncomment
             pusher.trigger(f'p-channel-{p_uuid}', u'broadcast', {'message':f'{player.user.username} has entered from the {reverse_dirs[direction]}.'})
 ```
 
-
-
-* Add rooms to your database
+Add rooms to your database
   * `./manage.py shell`
   * Copy/paste the contents of `util/create_world.py` into the Python interpreter
   * Exit the interpreter
 
-* Run the server
-  * `./manage.py runserver`
+Take a look at djangorestframework setup
+```
+python manage.py runserver
+```
+Navigate to 
 
-## FAQs and Troubleshooting
+### http://127.0.0.1:8000/api/registration/
 
-### 1. Can you show me an example of a map visualization?
+Register a new user named "admin"
 
-Here's a sample project created by [a team in CSPT2](https://confident-wright-ca0176.netlify.com): 
+### checkout http://127.0.0.1:8000/api/user/?name=admin
 
-![Lambda MUD 1](img/pt2_lambdamud.png)
+PUT in first name, last name, take a look around
 
-And here's [a FT team](https://lambdaschool.com/lab-demos/lambda-mud) that went above and beyond with their use of graphics:
+### Set up User Auth
+### Follow tutorial at: https://medium.com/@dakota.lillie/django-react-jwt-authentication-5015ee00ef9a
 
-![Lambda MUD 2](img/ex_lambdamud.png)
+Change "core" in tutorial to adventure
 
-And here's an example on iOS:
+### To check login and obtain a token auth: http://127.0.0.1:8000/token-auth/
 
-![Lambda MUD Mobile](img/ios_lambdamud.jpg)
+links that work related to the game: 
+### http://127.0.0.1:8000/api/adventure/init
+### http://127.0.0.1:8000/api/adventure/move # GET: user inputs n, s, e, w
+### http://127.0.0.1:8000/api/adventure/say # POST: results of what room player is in
+  
+  
+  
 
-### 2. How do I build something like that?
 
 Think about the algorithm to draw your map. It will probably be something like this:
 
@@ -103,10 +110,6 @@ What data do you need to implement this? A list of rooms, their exits, maybe the
 
 I'll leave that to you to determine.
 
-
-### 4. What is Pusher?
-
-Pusher is a cross-platform websocket library. This will allow you to turn your app into a real MUD with live push notifications to your client. You can consider integration to be a stretch goal but it's worth the effort if you have the time: websockets are powerful!
 
 
 ### 5. What will the `rooms` API endpoint look like?
