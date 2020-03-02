@@ -24,7 +24,42 @@ pusher = Pusher(app_id=config('PUSHER_APP_ID'), key=config('PUSHER_APP_KEY'), se
 @api_view(["GET"])#computer releases the following information
 
 def initialize(request):
-    user = UserSerializer(request.user)
+    user = request.user
+    # user = UserSerializer(request.user)
+    # serializer = UserSerializer(request.user)
+    # # return Response(serializer.data)    # returns { username: "admin"} in json 
+    # username = serializer.data
+    # def retrieve_id(username):
+    #     sql = f'''
+    #     select id 
+    #     from auth_user 
+    #     where username = '{username}';
+    #     '''
+    #     try:
+    #         with connection.cursor() as cursor:
+    #             cursor.execute(sql)
+    #             return cursor.fetchall()
+    #     except Exception as e:
+    #         return [e]
+    player = user.player
+    player_id = player.id
+    room = player.room()
+    players = room.playerNames(player_id)
+    
+    return Response(players)
+
+    def retrieve_user_id(user):
+        sql = f'''
+        select user_id 
+        from auth_user_groups 
+        where id = '{user_id}';
+        '''
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute(sql)
+                return cursor.fetchall()
+        except Exception as e:
+            return [e]
 
     def insertuser(user): # insert id as player_id from auth_user to auth_user_user
         sql = f'''
@@ -54,16 +89,16 @@ def initialize(request):
     
 
 
-    player = user.player # permission_id? from auth_user_user_permissions
+    # player = user.player # permission_id? from auth_user_user_permissions
     # player_id = player.id # user_id from adventure_player table
     # uuid = player.uuid # uuid from adventure_player table
     # room = player.room() # currentRoom from adventure_player
     # players = room.playerNames(player_id) # user_id where group_id is same as group_id in user_id in auth_user_groups # get name from auth_group
     # return JsonResponse({'uuid': uuid, 'name':player.user.username, 'title':room.title, 'description':room.description, 'players':players}, safe=True)
 
-    return JsonResponse({'uuid'}, safe=True)    
-    # serializer = UserSerializer(request.user)
-    # return Response(serializer.data)    
+    # return JsonResponse({'uuid'}, safe=True)    
+
+    #username is in auth_user, go get user_id from django_admin_log
 
 
 @csrf_exempt
